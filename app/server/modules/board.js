@@ -4,7 +4,6 @@ const Board = require("../../db/models/boards");
 const cardRouter = require("./card");
 
 const jsonParser = bodyParser.json();
-
 const router = express.Router();
 
 async function isBoardExist(property) {
@@ -38,7 +37,6 @@ router.post("/", jsonParser, async (req, res) => {
     });
 
     await newBoard.save();
-
     res.send("Board is added");
 });
 
@@ -52,7 +50,6 @@ router.delete("/", jsonParser, async (req, res) => {
     }
 
     await Board.deleteOne({ name });
-
     res.send("Board is removed");
 });
 

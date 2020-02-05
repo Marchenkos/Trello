@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const Board = require("../../db/models/boards");
 
 const jsonParser = bodyParser.json();
-
 const router = express.Router();
 
 router.post("/", jsonParser, async (req, res) => {
@@ -23,7 +22,6 @@ router.post("/", jsonParser, async (req, res) => {
     await Board.update({ name: boardName }, {
         $addToSet: { cards: [newCard] }
     });
-
     res.send("Card is added");
 });
 
