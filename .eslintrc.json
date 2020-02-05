@@ -1,0 +1,56 @@
+// {
+//     "overrides": [
+//         {
+//             "files": ["*-test.js","*.spec.js"],
+//             "rules": {
+//                 "no-unused-expressions": "off"
+//             }
+//         }
+//     ],
+//     "env": {
+//         "browser": true,
+//         "commonjs": true,
+//         "node": true,
+//         "jest": true,
+//         "es6": true
+//     },
+//     "extends": [
+//         "airbnb"
+//     ],
+//     "globals": {
+//         "Atomics": "readonly",
+//         "SharedArrayBuffer": "readonly"
+//     },
+//     "parserOptions": {
+//         "ecmaFeatures": {
+//             "jsx": true
+//         },
+//         "ecmaVersion": 6,
+//         "sourceType": "module"
+//     },
+//     "rules": {
+//         "no-console":"off",
+//         "semi-spacing": ["error", {"before": false, "after": true}],
+//         "quotes": ["error", "double"],
+//         "indent":["error", 4],
+//         "padded-blocks":"off",
+//         "import/prefer-default-export": "off",
+//         "no-trailing-spaces":"error",
+//         "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
+//         "no-var":"error",
+//         "consistent-return": "off",
+//         "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
+//         "object-property-newline": "error",
+//         "max-len":["error", 130],
+//         "no-nested-ternary": "off",
+//         "comma-dangle": "off",
+//         "function-paren-newline": ["error", "consistent"],
+//         "arrow-body-style": "off",
+//         "arrow-parens":"off",
+//         "totalResult": "off",
+//         "no-alert":"off",
+//         "object-curly-newline":"off",
+//         "no-else-return":"off",
+//         "linebreak-style": "off"
+//     }
+// }
