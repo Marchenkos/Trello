@@ -14,7 +14,7 @@ const schema = new Schema({
         default: null
     },
     estimate: {
-        type: Int32
+        type: Number
     },
     dueDate: {
         type: Date
