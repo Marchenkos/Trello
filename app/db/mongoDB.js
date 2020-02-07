@@ -1,13 +1,16 @@
 const mongoose = require("mongoose");
 
-function connect() {
-    mongoose.connect("mongodb+srv://marchenkus:qazxcdevbnmk12@cluster0-ywtyg.mongodb.net/trello", {
-        useNewUrlParser: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true
-    });
+class DB {
+    constructor() {
+    }
 
-    return "DB is connected";
+    connect() {
+        mongoose.connect("mongodb+srv://marchenkus:qazxcdevbnmk12@cluster0-ywtyg.mongodb.net/trello", {
+            useNewUrlParser: true,
+            useFindAndModify: false,
+            useUnifiedTopology: true
+        });
+    }
 }
 
-module.exports = connect;
+module.exports = DB;

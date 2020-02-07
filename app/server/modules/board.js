@@ -1,13 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Board = require("../../db/models/boards");
-const cardRouter = require("./card");
 const { isBoardExist } = require("../helpers/findBoards");
 
 const jsonParser = bodyParser.json();
 const router = express.Router();
-
-router.use("/card", cardRouter);
 
 router.get("/:name", async (req, res) => {
     const boardName = req.params.name;
@@ -22,24 +19,25 @@ router.get("/", async (req, res) => {
     res.send(boardList);
 });
 
-router.post("/", jsonParser, async (req, res) => {
+router.post("/", jsonParser, async (req, res, next) => {
     try {
         if (!req.body) return res.sendStatus(400);
 
-        const { name, color, description } = req.body;
-
+        const { name, color, description, createAt } = req.body;
+    
         const newBoard = new Board({
             name,
             color,
-            description
+            description,
+            createAt
         });
-
+    
         await newBoard.save();
         await newBoard
         res.send("Board is added");
     }
-    catch(err) {
-        res.send("Error");
+    catch (err) {
+        next(err);
     }
 });
 
