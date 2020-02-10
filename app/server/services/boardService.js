@@ -23,6 +23,10 @@ class BoardService {
     async deleteBoardByName(name) {
         return await this.repository.removeBoard(name);
     }
+
+    async updateBoard(name, values) {
+        return await this.repository.updateBoard({ name }, values);
+    }
 }
 
 module.exports = BoardService;

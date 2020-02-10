@@ -44,6 +44,12 @@ class BoardRepository {
             return false;
         }
     }
+
+    async updateBoard(name, newParameters) {
+        const board = await Board.findOne(name);
+
+        return await Board.findByIdAndUpdate(board._id, newParameters);
+    }
 }
 
 module.exports = BoardRepository;

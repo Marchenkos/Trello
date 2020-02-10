@@ -45,6 +45,15 @@ class BoardController{
         
         removeBoard ? res.send(removeBoard) : next(new Error());
     }
+
+    async updateBoard(req, res, next) {
+        const boardName = req.params.name;
+        const newValues = req.body;
+
+        const board = await this.service.updateBoard(boardName, newValues);
+        
+        board ? res.send(board) : next(new Error());
+    }
 }
 
 module.exports = BoardController;

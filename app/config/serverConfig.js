@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { HOST } = require("./constants");
 const Router = require("./routerConfig");
 const DB = require("./dbConfig");
+const ErrorBoundary = require("./errorHandler");
 
 const jsonParser = bodyParser.json();
 
@@ -34,11 +35,9 @@ class Server {
     }
 
     connectErrors() {
-        this.app.use((err, req, res, next) => {
-            if (err) {
-                res.status(500).send("Something brroken");
-            }
-        });
+        const errorBoundary = new ErrorBoundary(this.app);
+
+        errorBoundary.connect();
     }
 
     connectDB() {
