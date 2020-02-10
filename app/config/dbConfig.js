@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { CONNECT_URL } = require("./secretFileENM");
+const { CONNECT_URL } = require("./secretFile.env");
 
 class DB {
     constructor() {
