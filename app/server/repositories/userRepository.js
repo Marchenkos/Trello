@@ -8,12 +8,12 @@ class UserRepository {
     }
 
     async findOne(condition) {
-        const result = await User.findOne(condition, (err, card) => {
+        const result = await User.findOne(condition, (err, user) => {
             if (err) {
                 return null;
             }
 
-            return card;
+            return user;
         });
 
         return result;
@@ -21,9 +21,24 @@ class UserRepository {
 
     async addUser(newUser) {
         try {
+            const isUserExis = await this.findOne({ login: newUser.login });
+
+            if(isUserExis) {
+                return new Error("The same user already exists");
+            }
+
             const result = await User.create(newUser)
-     
+
             return result;
+        }
+        catch(err) {
+            return false;
+        }
+    }
+
+    async checkUser(login) {
+        try {
+            return await User.findOne({ login });
         }
         catch(err) {
             return false;

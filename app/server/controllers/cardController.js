@@ -47,11 +47,7 @@ class CardController{
 
     async deleteCardByName(req, res, next) {
         const cardName = req.params.name;
-        //лучше вызывать функци. проверки или ловить ошибку?
-        // if (! await isBoardExist({ name: boardName })) {
-        //     res.send("This board isn't exist");
-        // }
-    
+
         const card = await this.service.deleteCardByName({ name: cardName });
         
         card ? res.send(card) : next(new Error());

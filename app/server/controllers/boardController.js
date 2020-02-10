@@ -31,19 +31,15 @@ class BoardController{
             createAt
         });
 
-        result ? res.send(result) : next(new Error("Not add"));
+        result ? res.send(result) : next(new Error("Board is not added"));
     }
 
     async deleteBoardByName(req, res, next) {
         const boardName = req.params.name;
-        //лучше вызывать функци. проверки или ловить ошибку?
-        // if (! await isBoardExist({ name: boardName })) {
-        //     res.send("This board isn't exist");
-        // }
-    
+
         const removeBoard = await this.service.deleteBoardByName({ name: boardName });
         
-        removeBoard ? res.send(removeBoard) : next(new Error());
+        removeBoard ? res.send(removeBoard) : next(new Error("Board is not removed"));
     }
 
     async updateBoard(req, res, next) {
@@ -52,7 +48,7 @@ class BoardController{
 
         const board = await this.service.updateBoard(boardName, newValues);
         
-        board ? res.send(board) : next(new Error());
+        board ? res.send(board) : next(new Error("Board is not updated"));
     }
 }
 

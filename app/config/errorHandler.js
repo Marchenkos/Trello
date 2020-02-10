@@ -18,7 +18,7 @@ class ErrorBoundary {
 
     errorHandler(err, req, res, next) {
         res.status(500);
-        res.send("Error!");
+        res.send(`${err}`);
     }
 }
 

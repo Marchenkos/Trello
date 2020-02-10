@@ -5,7 +5,6 @@ class BoardService {
         this.repository = new BoardRepository();
     }
 
-    //async or not
     async findAll() {
         return await this.repository.find({});
     }
