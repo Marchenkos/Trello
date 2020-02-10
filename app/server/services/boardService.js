@@ -17,13 +17,7 @@ class BoardService {
     }
 
     async addBoard(newBoard) {
-        try {
-            const findedBoard = await this.repository.addBoard(newBoard);
-            console.log(findedBoard);
-        }
-        catch(err) {
-            return "Error";
-        }
+        return await this.repository.addBoard(newBoard);
     }
 
     async deleteBoardByName(name) {

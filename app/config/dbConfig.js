@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
+const { CONNECT_URL } = require("./secretFileENM");
 
 class DB {
     constructor() {
     }
 
     connect() {
-        mongoose.connect("mongodb+srv://marchenkus:qazxcdevbnmk12@cluster0-ywtyg.mongodb.net/trello", {
+        mongoose.connect(CONNECT_URL, {
             useNewUrlParser: true,
             useFindAndModify: false,
             useUnifiedTopology: true

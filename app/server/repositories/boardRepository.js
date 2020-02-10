@@ -14,23 +14,35 @@ class BoardRepository {
     }
 
     async findOne(condition) {
-        const board = await Board.findOne(condition);
+        const result = await Board.findOne(condition, (err, board) => {
+            if (err) {
+                return null;
+            }
 
-        return board;
+            return board;
+        });
+
+        return result;
     }
 
     async addBoard(newBoard) {
-        await Board.create(newBoard, (err, rez) => {
-            if(err) {
-                return err;
-            }
-        });
-
-        return "Success";
+        try {
+            const result = await Board.create(newBoard)
+     
+            return result;
+        }
+        catch(err) {
+            return false;
+        }
     }
 
     async removeBoard(condition) {
-        return await Board.findOneAndDelete(condition);
+        try {
+            return await Board.findOneAndDelete(condition);
+        }
+        catch(err) {
+            return false;
+        }
     }
 }
 

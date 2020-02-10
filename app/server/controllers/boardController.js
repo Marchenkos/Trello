@@ -8,7 +8,7 @@ class BoardController{
     async getAll(req, res) {
         const allBoards = await this.service.findAll();
 
-        allBoards.length == 0 ? res.send("NULL") : res.send(allBoards);
+        allBoards.length == 0 ? res.send(null) : res.send(allBoards);
     }
 
     async getSpecifyBoard(req, res, next) {
@@ -16,38 +16,34 @@ class BoardController{
 
         const board = await this.service.findSpecifyBoard({ name: boardName });
 
-        board === null ? next(Error("Not found")) : res.send(board);
+        board === null ? next(new Error("Not found")) : res.send(board);
     }
 
     async addBoard(req, res, next) {
-        try {
-            if (!req.body) return res.sendStatus(400);
+        if (!req.body) return res.sendStatus(400);
 
-            const { name, color, description, createAt } = req.body;
+        const { name, color, description, createAt } = req.body;
 
-            await this.service.addBoard({
-                name,
-                color,
-                description,
-                createAt
-            });
+        const result = await this.service.addBoard({
+            name,
+            color,
+            description,
+            createAt
+        });
 
-            res.send("Board is added");
-        }
-        catch (err) {
-            res.send("Board isnt added");
-        }
+        result ? res.send(result) : next(new Error("Not add"));
     }
 
     async deleteBoardByName(req, res, next) {
         const boardName = req.params.name;
-
+        //лучше вызывать функци. проверки или ловить ошибку?
         // if (! await isBoardExist({ name: boardName })) {
         //     res.send("This board isn't exist");
         // }
     
-        const removeDoard = await this.service.deleteBoardByName({ name: boardName });
-        res.send("Board is removed");
+        const removeBoard = await this.service.deleteBoardByName({ name: boardName });
+        
+        removeBoard ? res.send(removeBoard) : next(new Error());
     }
 }
 
