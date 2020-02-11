@@ -20,7 +20,7 @@ class CardController{
     }
 
     async addCard(req, res, next) {
-        if (!req.body) return res.sendStatus(400);
+        if (!req.body || res.statusCode == "422") return next(new Error("Card is not added"));
 
         const {
             name,
@@ -42,7 +42,7 @@ class CardController{
             status
         });
 
-        result ? res.send(result) : next(new Error("Not add"));
+        result ? res.send(result) : next(new Error("Card is not added"));
     }
 
     async deleteCardByName(req, res, next) {

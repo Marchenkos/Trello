@@ -2,16 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const schema = new Schema({
     name: {
-        type: String,
-        required: true
-    },
-    createAt: {
-        type: String,
-        required: true
+        type: String
     },
     description: {
-        type: String,
-        default: null
+        type: String
     },
     estimate: {
         type: Number
@@ -23,8 +17,10 @@ const schema = new Schema({
         type: Array
     },
     status: {
-        type: Boolean,
-        default: false
+        type: Boolean
+    },
+    createAt: {
+        type: String
     }
 });
 

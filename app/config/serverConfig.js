@@ -4,13 +4,16 @@ const bodyParser = require("body-parser");
 const { HOST } = require("./constants");
 const Router = require("./routerConfig");
 const DB = require("./dbConfig");
-const ErrorBoundary = require("./errorHandler");
+const ErrorBoundary = require("./ErrorHandler");
+const Validator = require("./Validator");
+const logger = require("./logger");
 
 const jsonParser = bodyParser.json();
 
 class Server {
     constructor() {
         this.app = express();
+        this.validator = new Validator();
     }
 
     start() {
@@ -26,6 +29,16 @@ class Server {
 
     connectMiddlewares() {
         this.app.use(jsonParser);
+        this.app.use((req, res, next) => {
+            logger.info({
+                level: 'info',
+                message: req.method
+            });
+            
+            next();
+        })
+
+        this.app.use(this.validator.validateMiddlewares.bind(this.validator));
     }
 
     connectRouters() {

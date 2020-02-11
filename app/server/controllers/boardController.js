@@ -20,7 +20,7 @@ class BoardController{
     }
 
     async addBoard(req, res, next) {
-        if (!req.body) return res.sendStatus(400);
+        if (!req.body || res.statusCode == "422") return next(new Error("Board is not added"));
 
         const { name, color, description, createAt } = req.body;
 

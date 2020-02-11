@@ -8,17 +8,14 @@ const schema = new Schema({
             unique: true
         }
     },
-    color: {
-        type: String,
-        default: "white"
-    },
     description: {
-        type: String,
-        default: null
+        type: String
+    },
+    color: {
+        type: String
     },
     createAt: {
-        type: String,
-        required: true
+        type: String
     }
 });
 

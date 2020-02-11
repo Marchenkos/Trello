@@ -1,3 +1,5 @@
+const logger = require("./logger");
+
 class ErrorBoundary {
     constructor(app) {
         this.routre = app;
@@ -10,6 +12,10 @@ class ErrorBoundary {
 
     clientErrorHandler(err, req, res, next) {
         if (req.xhr) {
+            logger.error({
+                level: 'error',
+                message: err.message
+            });
           res.status(500).send({ error: 'Something failed!' });
         } else {
           next(err);
@@ -17,6 +23,10 @@ class ErrorBoundary {
     }
 
     errorHandler(err, req, res, next) {
+        logger.error({
+            level: 'error',
+            message: err.message
+        });
         res.status(500);
         res.send(`${err}`);
     }
