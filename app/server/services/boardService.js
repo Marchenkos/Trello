@@ -23,8 +23,10 @@ class BoardService {
         return await this.repository.removeBoard(name);
     }
 
-    async updateBoard(name, values) {
-        return await this.repository.updateBoard({ name }, values);
+    async updateBoard(boardName, newValue) {
+        delete newValue.currentUser;
+
+        return await this.repository.updateBoard({ name: boardName }, newValue);
     }
 }
 

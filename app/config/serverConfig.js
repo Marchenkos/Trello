@@ -30,11 +30,12 @@ class Server {
     connectMiddlewares() {
         this.app.use(jsonParser);
         this.app.use((req, res, next) => {
-            logger.info({
-                level: 'info',
-                message: req.method
+            logger.info(req.headers.host, {
+                method: req.method,
+                ip: req.ip,
+                url: req.url
             });
-            
+
             next();
         })
 

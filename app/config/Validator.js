@@ -6,7 +6,7 @@ const logger = require("./logger");
 
 class Validator {
     constructor() {
-        this.supportedMethods = ["post", "put"];
+        this.supportedMethods = ["post", "put", "delete"];
         this.validationOptions = {
             abortEarly : true,
             stripUnknown: true
@@ -17,8 +17,11 @@ class Validator {
         const route = req.url;
         const method = req.method.toLowerCase();
 
-        if (_.includes(this.supportedMethods, method) && _.has(schemas, route)) {
-            const specialSchema = _.get(schemas, route);
+        console.log(route, schemas.has(route));
+
+        if (_.includes(this.supportedMethods, method) && schemas.has(route)) {
+            const specialSchema = schemas.get(route);
+            console.log("Hi");
 
             if (specialSchema) {
                 return Joi.validate(req.body, specialSchema, this.validationOptions, (err, data) => {
@@ -35,12 +38,11 @@ class Validator {
                             }
                         };
 
-                        // logger.error(`422 - message: ${err.message} - ${req.url} - ${req.method} - ${req.ip}`);
-                        logger.error({
-                            level: 'error',
-                            message: err.message
+                        logger.error(err.message, {
+                            method: req.method,
+                            ip: req.ip,
+                            url: req.url
                         });
-
                         res.status(422).json(errorMessage);
                     }
 

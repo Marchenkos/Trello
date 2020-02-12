@@ -46,9 +46,12 @@ class BoardRepository {
     }
 
     async updateBoard(name, newParameters) {
-        const board = await Board.findOne(name);
-
-        return await Board.findByIdAndUpdate(board._id, newParameters);
+        try {
+            return await Board.findOneAndUpdate(name, {$set: newParameters});
+        }
+        catch(err) {
+            return false;
+        }
     }
 }
 

@@ -49,9 +49,12 @@ class CardRepository {
     }
 
     async updateCard(name, newParameters) {
-        const card = await Card.findOne({ name });
-
-        return await Card.findByIdAndUpdate(card._id, newParameters);
+        try {
+            return await Card.findOneAndUpdate(name, {$set: newParameters});
+        }
+        catch(err) {
+            return false;
+        }
     }
 }
 

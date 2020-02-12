@@ -28,7 +28,7 @@ class CardService {
     }
 
     async updateCard(name, values) {
-        return await this.repository.updateCard(name, values);
+        return await this.repository.updateCard({ name }, values);
     }
 }
 

@@ -16,17 +16,19 @@ class ErrorBoundary {
                 level: 'error',
                 message: err.message
             });
-          res.status(500).send({ error: 'Something failed!' });
+            res.status(500).send({ error: 'Something failed!' });
         } else {
           next(err);
         }
     }
 
     errorHandler(err, req, res, next) {
-        logger.error({
-            level: 'error',
-            message: err.message
+        logger.error(err.message, {
+            method: req.method,
+            ip: req.ip,
+            url: req.url
         });
+
         res.status(500);
         res.send(`${err}`);
     }

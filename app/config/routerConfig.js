@@ -23,7 +23,7 @@ class Router {
         this.router.get("/board", this.board.getAll.bind(this.board));
         this.router.get("/board/:name", this.board.getSpecifyBoard.bind(this.board));
         this.router.post("/board", this.board.addBoard.bind(this.board));
-        this.router.delete("/board/:name", this.board.deleteBoardByName.bind(this.board));
+        this.router.delete("/board/remove/:name", this.board.deleteBoardByName.bind(this.board));
         this.router.put("/board/:name", this.board.updateBoard.bind(this.board));
     }
 
