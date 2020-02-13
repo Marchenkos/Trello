@@ -26,7 +26,7 @@ class UserController{
 
         const newUser = await this.service.addUser(login, password);
 
-        newUser ? res.send(newUser) : next(newUser);
+        newUser ? res.send(newUser) : next(new Error("Registration was falled out"));
     }
 
     async checkUser(req, res, next) {

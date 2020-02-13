@@ -24,11 +24,15 @@ class CardService {
     }
 
     async deleteAllCards(boardName) {
-        return await this.repository.removeAllCards(boardName);
+        const result = await this.repository.removeAllCards(boardName);
+
+        return result.deletedCount;
     }
 
-    async updateCard(name, values) {
-        return await this.repository.updateCard({ name }, values);
+    async updateCard(name, newValue) {
+        delete newValue.currentUser;
+
+        return await this.repository.updateCard({ name }, newValue);
     }
 }
 

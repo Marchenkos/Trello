@@ -41,7 +41,7 @@ class CardRepository {
 
     async removeAllCards(condition) {
         try {
-            return await (await Card.deleteMany(condition)).deletedCount
+            return await Card.deleteMany(condition);
         }
         catch(err) {
             return false;

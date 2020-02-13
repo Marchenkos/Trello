@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 const { HOST } = require("./constants");
 const Router = require("./routerConfig");
@@ -13,7 +14,7 @@ const jsonParser = bodyParser.json();
 class Server {
     constructor() {
         this.app = express();
-        this.validator = new Validator();
+        this.validator = new Validator(this.app);
     }
 
     start() {
@@ -28,6 +29,7 @@ class Server {
     }
 
     connectMiddlewares() {
+        this.app.use(helmet.permittedCrossDomainPolicies())
         this.app.use(jsonParser);
         this.app.use((req, res, next) => {
             logger.info(req.headers.host, {
@@ -37,9 +39,9 @@ class Server {
             });
 
             next();
-        })
+        });
 
-        this.app.use(this.validator.validateMiddlewares.bind(this.validator));
+        this.app.use(this.validator.getValidateSchema.bind(this.validator));
     }
 
     connectRouters() {

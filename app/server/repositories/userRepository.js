@@ -24,7 +24,7 @@ class UserRepository {
             const isUserExis = await this.findOne({ login: newUser.login });
 
             if(isUserExis) {
-                return new Error("The same user already exists");
+                return false;
             }
 
             const result = await User.create(newUser)

@@ -24,16 +24,16 @@ class Router {
         this.router.get("/board/:name", this.board.getSpecifyBoard.bind(this.board));
         this.router.post("/board", this.board.addBoard.bind(this.board));
         this.router.delete("/board/remove/:name", this.board.deleteBoardByName.bind(this.board));
-        this.router.put("/board/:name", this.board.updateBoard.bind(this.board));
+        this.router.put("/board/refresh/:name", this.board.updateBoard.bind(this.board));
     }
 
     cardRouter() {
         this.router.get("/card", this.card.getAll.bind(this.card));
         this.router.get("/card/:name", this.card.getSpecifyCard.bind(this.card));
         this.router.post("/card", this.card.addCard.bind(this.card));
-        this.router.delete("/card/:name", this.card.deleteCardByName.bind(this.card));
+        this.router.delete("/card/remove/:name", this.card.deleteCardByName.bind(this.card));
         this.router.delete("/card/removeAll/:name", this.card.deleteAllCards.bind(this.card));
-        this.router.put("/card/:name", this.card.updateCard.bind(this.card));
+        this.router.put("/card/refresh/:name", this.card.updateCard.bind(this.card));
     }
 
     userRouter() {

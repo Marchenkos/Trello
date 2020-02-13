@@ -40,7 +40,7 @@ class BoardController{
         const boardName = req.params.name;
 
         const removeBoard = await this.service.deleteBoardByName({ name: boardName });
-        
+
         removeBoard ? res.send(removeBoard) : next(new Error("Board is not removed"));
     }
 

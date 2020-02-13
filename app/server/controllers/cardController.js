@@ -20,7 +20,7 @@ class CardController{
     }
 
     async addCard(req, res, next) {
-        if (!req.body || res.statusCode == "422") return next(new Error("Card is not added"));
+        if (res.statusCode == "422") return next(new Error("No correct data"));
 
         const {
             name,
@@ -46,28 +46,34 @@ class CardController{
     }
 
     async deleteCardByName(req, res, next) {
+        if (res.statusCode == "422") return next(new Error("No correct data"));
+
         const cardName = req.params.name;
 
         const card = await this.service.deleteCardByName({ name: cardName });
         
-        card ? res.send(card) : next(new Error());
+        card ? res.send(card) : next(new Error("This card isn't exist"));
     }
 
     async deleteAllCards(req, res, next) {
+        if (res.statusCode == "422") return next(new Error("No correct data"));
+
         const boardName = req.params.name;
 
-        const card = await this.service.deleteAllCards({ createAt: boardName });
+        const count = await this.service.deleteAllCards({ createAt: boardName });
         
-        card ? res.send(card) : next(new Error());
+        count > 0 ? res.send("Success") : next(new Error("Cards are not removed"));
     }
 
     async updateCard(req, res, next) {
+        if (res.statusCode == "422") return next(new Error("No correct data"));
+
         const cardName = req.params.name;
         const newValues = req.body;
 
         const card = await this.service.updateCard(cardName, newValues);
         
-        card ? res.send(card) : next(new Error());
+        card ? res.send(card) : next(new Error("Card is not updated"));
     }
 }
 
