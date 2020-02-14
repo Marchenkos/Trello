@@ -2,7 +2,7 @@ const _ = require("lodash");
 const Joi = require("joi");
 
 const schemas = require("./validateSchemas");
-const logger = require("./logger");
+const logger = require("../logger");
 
 class Validator {
     constructor(app) {

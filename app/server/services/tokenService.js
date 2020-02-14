@@ -1,7 +1,7 @@
 const uuid = require("uuid");
 const jwt = require('jsonwebtoken');
 
-const { SECRET_KEY } =require("../../config/secretFile.env");
+const serverConfig =require("../../config/serverConfig");
 const UserRepository = require("../repositories/userRepository");
 
 class TokenService {
@@ -17,7 +17,7 @@ class TokenService {
         }
 
         return {
-            token: jwt.sign({id: user._id}, SECRET_KEY),
+            token: jwt.sign({id: user._id}, serverConfig.secretKey),
             refreshToken: uuid()
         };
     }

@@ -1,14 +1,12 @@
-const mongoose = require("mongoose");
-const { CONNECT_URL } = require("./secretFile.env");
+require('dotenv').config();
 
-class DB {
-    connect() {
-        mongoose.connect(CONNECT_URL, {
-            useNewUrlParser: true,
-            useFindAndModify: false,
-            useUnifiedTopology: true
-        });
+const dbConfig = {
+    connectUrl: process.env.CONNECT_URL,
+    connectionOptions: {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true
     }
-}
+};
 
-module.exports = DB;
+module.exports = dbConfig;

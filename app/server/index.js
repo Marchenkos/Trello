@@ -1,4 +1,4 @@
-const Server = require("../config/serverConfig");
+const Server = require("./server");
 
 const server = new Server();
 server.start();

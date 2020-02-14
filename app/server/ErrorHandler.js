@@ -2,12 +2,12 @@ const logger = require("./logger");
 
 class ErrorBoundary {
     constructor(app) {
-        this.routre = app;
+        this.router = app;
     }
 
     connect() {
-        this.routre.use(this.clientErrorHandler);
-        this.routre.use(this.errorHandler);
+        this.router.use(this.clientErrorHandler);
+        this.router.use(this.errorHandler);
     }
 
     clientErrorHandler(err, req, res, next) {
